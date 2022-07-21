@@ -1,0 +1,11 @@
+dbrouter:
+  config:
+    defaultDb: defualt00
+    defaultKey: key
+    dbCount: 2
+    tbCount: 3
+    list: list1,list2
+    list1:
+      driver_class_name: wang
+    list2:
+      name: duan

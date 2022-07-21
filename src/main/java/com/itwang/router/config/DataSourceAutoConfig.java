@@ -1,0 +1,86 @@
+package com.itwang.router.config;
+
+import cn.hutool.core.util.StrUtil;
+import com.itwang.router.properties.ConfigProperties;
+import com.itwang.router.utils.PropertyUtil;
+import org.springframework.context.EnvironmentAware;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.core.env.Environment;
+
+
+import javax.annotation.PostConstruct;
+import javax.annotation.Resource;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import static com.itwang.router.constants.StringConstants.CONFIG_PREFIX;
+
+@Configuration
+public class DataSourceAutoConfig implements EnvironmentAware {
+
+    private Environment environment;
+    /**
+     * 默认配置环境
+     */
+    private static Map<String,Object> defaultEnvironment = new HashMap<>();
+
+    /**
+     * 所有的配置环境
+     */
+    private static Map<String, Map<String, Object>> allEnviroment = new HashMap<>();
+
+
+    private int dbCount;
+
+    private int tbCount;
+
+    private String defaultKey;
+    /**
+     * 采用注入的
+     */
+    @Resource
+    private ConfigProperties properties;
+
+
+    /**
+     * 等待其余的注册完毕
+     */
+    @PostConstruct
+    public void doAfter(){
+        initOtherKey();
+        initDefaultDbConfig();
+        initListDbConfig();
+
+    }
+
+    private void initOtherKey(){
+        this.dbCount = properties.getDbCount();
+        this.tbCount = properties.getTbCount();
+        this.defaultKey = properties.getDefaultKey();
+    }
+
+    private void initDefaultDbConfig(){
+        if(StrUtil.isEmpty(properties.getDefaultDb())){
+            throw new RuntimeException("no defaultdb");
+        }
+        String defaultDbPrefix = String.format("%s.%s", CONFIG_PREFIX, properties.getDefaultDb());
+        defaultEnvironment = PropertyUtil.handle(environment, defaultDbPrefix, Map.class);
+    }
+
+    private void initListDbConfig(){
+        List<String> externDb = properties.getList();
+        String prefix = CONFIG_PREFIX;
+        for(String dbName : externDb){
+            Map<String,Object> result = PropertyUtil.handle(environment, String.format("%s.%s", prefix, dbName), Map.class);
+            allEnviroment.put(dbName, result);
+        }
+    }
+
+    @Override
+    public void setEnvironment(Environment environment) {
+        this.environment = environment;
+    }
+
+
+}

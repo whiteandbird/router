@@ -1,0 +1,42 @@
+{
+  "groups": [
+    {
+      "name": "dbrouter.config",
+      "type": "com.itwang.router.properties.ConfigProperties",
+      "sourceType": "com.itwang.router.properties.ConfigProperties"
+    }
+  ],
+  "properties": [
+    {
+      "name": "dbrouter.config.db-count",
+      "type": "java.lang.Integer",
+      "description": "分库数量",
+      "sourceType": "com.itwang.router.properties.ConfigProperties"
+    },
+    {
+      "name": "dbrouter.config.default-db",
+      "type": "java.lang.String",
+      "description": "默认主库",
+      "sourceType": "com.itwang.router.properties.ConfigProperties"
+    },
+    {
+      "name": "dbrouter.config.default-key",
+      "type": "java.lang.String",
+      "description": "默认key",
+      "sourceType": "com.itwang.router.properties.ConfigProperties"
+    },
+    {
+      "name": "dbrouter.config.list",
+      "type": "java.util.List<java.lang.String>",
+      "description": "所有库",
+      "sourceType": "com.itwang.router.properties.ConfigProperties"
+    },
+    {
+      "name": "dbrouter.config.tb-count",
+      "type": "java.lang.Integer",
+      "description": "分表数量",
+      "sourceType": "com.itwang.router.properties.ConfigProperties"
+    }
+  ],
+  "hints": []
+}
