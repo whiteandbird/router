@@ -23,12 +23,12 @@ public class DataSourceAutoConfig implements EnvironmentAware {
     /**
      * 默认配置环境
      */
-    private static Map<String,Object> defaultEnvironment = new HashMap<>();
+    private Map<String,Object> defaultEnvironment = new HashMap<>();
 
     /**
      * 所有的配置环境
      */
-    private static Map<String, Map<String, Object>> allEnviroment = new HashMap<>();
+    private Map<String, Map<String, Object>> allEnviroment = new HashMap<>();
 
 
     private int dbCount;
@@ -65,7 +65,7 @@ public class DataSourceAutoConfig implements EnvironmentAware {
             throw new RuntimeException("no defaultdb");
         }
         String defaultDbPrefix = String.format("%s.%s", CONFIG_PREFIX, properties.getDefaultDb());
-        defaultEnvironment = PropertyUtil.handle(environment, defaultDbPrefix, Map.class);
+        this.defaultEnvironment = PropertyUtil.handle(environment, defaultDbPrefix, Map.class);
     }
 
     private void initListDbConfig(){
@@ -73,7 +73,7 @@ public class DataSourceAutoConfig implements EnvironmentAware {
         String prefix = CONFIG_PREFIX;
         for(String dbName : externDb){
             Map<String,Object> result = PropertyUtil.handle(environment, String.format("%s.%s", prefix, dbName), Map.class);
-            allEnviroment.put(dbName, result);
+            this.allEnviroment.put(dbName, result);
         }
     }
 
