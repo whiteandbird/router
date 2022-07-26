@@ -1,6 +1,6 @@
 dbrouter:
   config:
-    defaultDb: defualt00
+    defaultDb: default00
     defaultKey: key
     dbCount: 2
     tbCount: 3
@@ -9,3 +9,5 @@ dbrouter:
       driver_class_name: wang
     list2:
       name: duan
+    default00:
+      name: wang
