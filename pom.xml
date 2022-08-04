@@ -46,11 +46,11 @@
             <artifactId>mybatis-spring-boot-starter</artifactId>
             <version>2.1.4</version>
         </dependency>
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <version>5.1.34</version>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>mysql</groupId>-->
+<!--            <artifactId>mysql-connector-java</artifactId>-->
+<!--            <version>5.1.34</version>-->
+<!--        </dependency>-->
 
         <dependency>
             <groupId>commons-beanutils</groupId>
@@ -78,6 +78,12 @@
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
+<!--        引入数据源-->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>8.0.28</version>
+        </dependency>
     </dependencies>
 
 </project>

@@ -4,10 +4,20 @@ dbrouter:
     defaultKey: key
     dbCount: 2
     tbCount: 3
-    list: list1,list2
-    list1:
-      driver_class_name: wang
-    list2:
-      name: duan
+    list: db01,db02
+    db01:
+      url: jdbc:mysql://127.0.0.1:3306/lottery_01?useUnicode=true
+      username: root
+      password: 123456
+    db02:
+      url: jdbc:mysql://127.0.0.1:3306/lottery_02?useUnicode=true
+      username: root
+      password: 123456
     default00:
-      name: wang
+      url: jdbc:mysql://127.0.0.1:3306/lottery?useUnicode=true
+      username: root
+      password: 123456
+
+mybatis:
+  config-location: classpath:mybatis/mybatis-config.xml
+  mapper-locations: classpath:mybatis/mapper/*.xml
