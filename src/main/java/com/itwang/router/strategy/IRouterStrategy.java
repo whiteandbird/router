@@ -1,5 +1,7 @@
 package com.itwang.router.strategy;
 
 public interface IRouterStrategy {
-    int chooseDb(String dbkey);
+    void chooseDb(String dbkey);
+
+    void clearContext();
 }

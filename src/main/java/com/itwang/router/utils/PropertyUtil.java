@@ -53,6 +53,7 @@ public class PropertyUtil {
     }
 
     private static Object v2(final Environment environment, final String prefix, final Class<?> targetClass){
+        String noPointPrefix = null;
         try {
             Class<?> binderClass = Class.forName("org.springframework.boot.context.properties.bind.Binder");
             Method getMethod = binderClass.getDeclaredMethod("get", Environment.class);
@@ -60,7 +61,7 @@ public class PropertyUtil {
 
             // 拿到binder实例
             // 处理后缀.不需要后缀.
-            String noPointPrefix =  prefix.endsWith(".") ? prefix.substring(0, prefix.length()-1) : prefix;
+            noPointPrefix =  prefix.endsWith(".") ? prefix.substring(0, prefix.length()-1) : prefix;
             Object binderInstance = getMethod.invoke(null, environment);
             Object bindResult =  bindMethod.invoke(binderInstance, noPointPrefix, targetClass);
             Method bindGetMethod = bindResult.getClass().getDeclaredMethod("get");
@@ -69,7 +70,7 @@ public class PropertyUtil {
 
         }catch (ClassNotFoundException | NoSuchMethodException | InvocationTargetException | IllegalAccessException e){
             e.printStackTrace();
-            throw new RuntimeException("转化失败");
+            throw new RuntimeException("转化失败,{}"+ noPointPrefix);
         }
 
     }

@@ -1,6 +1,7 @@
 package com.itwang.router.properties;
 
 import com.itwang.router.support.DataBaseConfig;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
@@ -13,6 +14,9 @@ import static com.itwang.router.constants.StringConstants.CONFIG_PREFIX;
 @Component
 public class ConfigProperties {
 
+    public ConfigProperties(){
+        System.out.println("config init");
+    }
     /**
      * 默认主库
      */
@@ -39,10 +43,6 @@ public class ConfigProperties {
      */
     private int tbCount;
 
-    @PostConstruct
-    public void init(){
-        System.out.println("fdsf");
-    }
 
 
     public String getDefaultDb() {
